@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:repository_viewer/home/models/repository_list.dart';
+import 'package:repository_viewer/repository_detail/view/repository_detail_screen.dart';
 
 import '../provider/repository_list_provider.dart';
 
@@ -50,25 +51,32 @@ class MobileProvidingScreenState extends ConsumerState<HomeScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                            decoration: BoxDecoration(border: Border.all()),
-                            padding: const EdgeInsets.all(16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(repositoryLists[index]
-                                    .stargazersCount
-                                    .toString()),
-                                Text(repositoryLists[index].license!.name!),
-                              ],
-                            )
-                            // ListTile(
-                            //   leading: Text(repositoryLists[index]
-                            //       .stargazersCount
-                            //       .toString()),
-                            //   title: Text(repositoryLists[index].license!.name!),
-                            // ),
-                            ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RepositoryDetailScreen.id);
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(border: Border.all()),
+                              padding: const EdgeInsets.all(16),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(repositoryLists[index]
+                                      .stargazersCount
+                                      .toString()),
+                                  Text(repositoryLists[index].license!.name!),
+                                ],
+                              )
+                              // ListTile(
+                              //   leading: Text(repositoryLists[index]
+                              //       .stargazersCount
+                              //       .toString()),
+                              //   title: Text(repositoryLists[index].license!.name!),
+                              // ),
+                              ),
+                        ),
                       );
                     })
               ],
