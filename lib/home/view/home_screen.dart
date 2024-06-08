@@ -45,50 +45,41 @@ class MobileProvidingScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       body: apiLoading
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: Column(
-                children: [
-                  ListView.builder(
-                    itemCount: repositoryLists.length,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, RepositoryDetailScreen.id,
-                              arguments: repositoryLists[index]);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                              decoration: BoxDecoration(border: Border.all()),
-                              padding: const EdgeInsets.all(16),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(repositoryLists[index]
-                                      .stargazersCount
-                                      .toString()),
-                                  repositoryLists[index].license != null
-                                      ? Text(
-                                          repositoryLists[index].license!.name!)
-                                      : Container(),
-                                ],
-                              )
-                              // ListTile(
-                              //   leading: Text(repositoryLists[index]
-                              //       .stargazersCount
-                              //       .toString()),
-                              //   title: Text(repositoryLists[index].license!.name!),
-                              // ),
-                              ),
+          : ListView.builder(
+              itemCount: repositoryLists.length,
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, RepositoryDetailScreen.id,
+                        arguments: repositoryLists[index]);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        decoration: BoxDecoration(border: Border.all()),
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(repositoryLists[index]
+                                .stargazersCount
+                                .toString()),
+                            repositoryLists[index].license != null
+                                ? Text(repositoryLists[index].license!.name!)
+                                : Container(),
+                          ],
+                        )
+                        // ListTile(
+                        //   leading: Text(repositoryLists[index]
+                        //       .stargazersCount
+                        //       .toString()),
+                        //   title: Text(repositoryLists[index].license!.name!),
+                        // ),
                         ),
-                      );
-                    },
-                  )
-                ],
-              ),
+                  ),
+                );
+              },
             ),
     );
   }
